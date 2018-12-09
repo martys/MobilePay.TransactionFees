@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.Program", "MobilePay.TransactionFees.Program\MobilePay.TransactionFees.Program.csproj", "{E725E78E-0EB8-4E41-B7EA-2F3593D8D3BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.Domain", "MobilePay.TransactionFees.Domain\MobilePay.TransactionFees.Domain.csproj", "{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E725E78E-0EB8-4E41-B7EA-2F3593D8D3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E725E78E-0EB8-4E41-B7EA-2F3593D8D3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E725E78E-0EB8-4E41-B7EA-2F3593D8D3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E725E78E-0EB8-4E41-B7EA-2F3593D8D3BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
