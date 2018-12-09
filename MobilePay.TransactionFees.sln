@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.Domain", "MobilePay.TransactionFees.Domain\MobilePay.TransactionFees.Domain.csproj", "{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.InMemoryStorage", "MobilePay.TransactionFees.InMemoryStorage\MobilePay.TransactionFees.InMemoryStorage.csproj", "{29C8748D-87AE-4D7B-B8D4-33EA9E6577F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.CommandHandlers", "MobilePay.TransactionFees.CommandHandlers\MobilePay.TransactionFees.CommandHandlers.csproj", "{1C0C45C1-F1A6-49A5-947A-943248335CC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.UnitTests", "MobilePay.TransactionFees.UnitTests\MobilePay.TransactionFees.UnitTests.csproj", "{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,17 @@ Global
 		{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CDD1C42-A77D-46B4-9EEC-3071DEF933FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29C8748D-87AE-4D7B-B8D4-33EA9E6577F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29C8748D-87AE-4D7B-B8D4-33EA9E6577F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29C8748D-87AE-4D7B-B8D4-33EA9E6577F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29C8748D-87AE-4D7B-B8D4-33EA9E6577F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C0C45C1-F1A6-49A5-947A-943248335CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C0C45C1-F1A6-49A5-947A-943248335CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C0C45C1-F1A6-49A5-947A-943248335CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C0C45C1-F1A6-49A5-947A-943248335CC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
