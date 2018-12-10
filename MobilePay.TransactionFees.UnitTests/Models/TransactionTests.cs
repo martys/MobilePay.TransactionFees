@@ -8,6 +8,27 @@ namespace MobilePay.TransactionFees.UnitTests.Models
 {
     public class TransactionTests
     {
+        [Fact]
+        public void Constructor_NullDate_ThrowsException()
+        {
+            //act & assert
+            Assert.Throws<DomainException>(() => new Transaction(null, new Name("STEAM"), new Amount(100)));
+        }
+        
+        [Fact]
+        public void Constructor_NullName_ThrowsException()
+        {
+            //act & assert
+            Assert.Throws<DomainException>(() => new Transaction(new Date(DateTime.Now), null, new Amount(100)));
+        }
+        
+        [Fact]
+        public void Constructor_NullAmount_ThrowsException()
+        {
+            //act & assert
+            Assert.Throws<DomainException>(() => new Transaction(new Date(DateTime.Now), new Name("STEAM"), null));
+        }
+        
         [Theory]
         [InlineData("1989-11-26", "1989-11-26")]
         [InlineData("1989-11-26", "1989-11-27")]

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using MobilePay.TransactionFees.Domain.CommandHandlers;
 using MobilePay.TransactionFees.Domain.Commands;
+using MobilePay.TransactionFees.Domain.Exceptions;
 using MobilePay.TransactionFees.Domain.Models;
 using MobilePay.TransactionFees.Domain.ValueObjects;
 
@@ -15,8 +17,10 @@ namespace MobilePay.TransactionFees.CommandHandlers
         public CalculateFeeWithInvoiceFeeHandler(ICommandHandler<CalculateFee, Fee> calculateFeeHandler,
             Fee invoiceFixedFee)
         {
-            _calculateFeeHandler = calculateFeeHandler;
-            _invoiceFixedFee = invoiceFixedFee;
+            _calculateFeeHandler = calculateFeeHandler
+                ?? throw new ApplicationException("Calculate fee handler cannot be null");
+            _invoiceFixedFee = invoiceFixedFee
+                ?? throw new ApplicationException("Invoice fixed fee cannot be null");
             _previousTransactions = new Dictionary<string, Transaction>();
         }
         

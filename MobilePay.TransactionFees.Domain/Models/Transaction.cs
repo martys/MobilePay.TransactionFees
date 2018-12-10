@@ -13,9 +13,9 @@ namespace MobilePay.TransactionFees.Domain.Models
 
         public Transaction(Date date, Name merchantName, Amount amount)
         {
-            MerchantName = merchantName;
-            Date = date;
-            Amount = amount;
+            MerchantName = merchantName ?? throw new DomainException("Merchant name cannot be null");
+            Date = date ?? throw new DomainException("Date cannot be null");
+            Amount = amount ?? throw new DomainException("Amount cannot be null");
         }
 
         public Fee CalculateTransactionPercentageFee(Percentage feePercentage)

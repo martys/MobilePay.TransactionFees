@@ -7,6 +7,21 @@ namespace MobilePay.TransactionFees.UnitTests.Models
 {
     public class MerchantTests
     {
+        
+        [Fact]
+        public void Constructor_NullName_ThrowsException()
+        {
+            //act & assert
+            Assert.Throws<DomainException>(() => new Merchant(null, new Percentage(15)));
+        }
+
+        [Fact]
+        public void Constructor_NullPercentage_ThrowsException()
+        {
+            //act & assert
+            Assert.Throws<DomainException>(() => new Merchant(new Name("STEAM"), null));
+        }
+        
         [Fact]
         public void ApplyTransactionPercentageFeeDiscount_FeeNull_ThrowsException()
         {

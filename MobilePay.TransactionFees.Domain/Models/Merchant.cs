@@ -1,3 +1,4 @@
+using System;
 using MobilePay.TransactionFees.Domain.Exceptions;
 using MobilePay.TransactionFees.Domain.ValueObjects;
 
@@ -10,8 +11,9 @@ namespace MobilePay.TransactionFees.Domain.Models
 
         public Merchant(Name name, Percentage transactionPercentageFeeDiscount)
         {
-            Name = name;
-            TransactionPercentageFeeDiscount = transactionPercentageFeeDiscount;
+            Name = name ?? throw new DomainException("Name cannot be null");
+            TransactionPercentageFeeDiscount = transactionPercentageFeeDiscount ?? 
+                throw new DomainException("Transaction percentage fee discount cannot be null");
         }
 
         public Fee ApplyTransactionPercentageFeeDiscount (Fee fee)
