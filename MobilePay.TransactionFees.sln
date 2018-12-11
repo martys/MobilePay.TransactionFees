@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.UnitTests", "MobilePay.TransactionFees.UnitTests\MobilePay.TransactionFees.UnitTests.csproj", "{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilePay.TransactionFees.AcceptanceTests", "MobilePay.TransactionFees.AcceptanceTests\MobilePay.TransactionFees.AcceptanceTests.csproj", "{A1CDB038-6094-4564-87CF-2E54099EFF97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{213B46A5-2BC2-4C7E-B044-ED7AB8F3A91A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1CDB038-6094-4564-87CF-2E54099EFF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1CDB038-6094-4564-87CF-2E54099EFF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1CDB038-6094-4564-87CF-2E54099EFF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1CDB038-6094-4564-87CF-2E54099EFF97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

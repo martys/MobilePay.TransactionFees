@@ -29,38 +29,9 @@ namespace MobilePay.TransactionFees.Program
                 merchantRepository);
             var calculateWithInvoiceFeeHandler = new CalculateFeeWithInvoiceFeeHandler(calculateFeeWithDiscountHandler, 
                 new Fee(InvoiceFixedFee));
-            var correlationId = Guid.NewGuid();
-            
-            string line = string.Empty;
-            using (var fileReader = new StreamReader(InputFilePath))
-            {
-                while((line = fileReader.ReadLine()) != null)
-                {
-                    try
-                    {
-                        if (!string.IsNullOrWhiteSpace(line))
-                        {
-                            var transactionData = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                            var transaction = new Transaction(new Date(DateTime.Parse(transactionData[0])),
-                                new Name(transactionData[1]),
-                                new Amount(double.Parse(transactionData[2])));
-                            var command = new CalculateFee(correlationId, transaction);
-                            var transactionFee = calculateWithInvoiceFeeHandler.Handle(command);
-                            Console.WriteLine($"{transaction.Date} {transaction.MerchantName} {transactionFee}");
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }   
-            }
 
-            Console.Read();
+            var transactionFeeCalculator = new FeeCalculationApp(calculateWithInvoiceFeeHandler);
+            transactionFeeCalculator.CalculateTransactionFees(InputFilePath);
         }
     }
 }
