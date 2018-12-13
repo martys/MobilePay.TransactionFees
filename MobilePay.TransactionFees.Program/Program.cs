@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using MobilePay.TransactionFees.CommandHandlers;
-using MobilePay.TransactionFees.Domain.Commands;
 using MobilePay.TransactionFees.Domain.Models;
 using MobilePay.TransactionFees.Domain.ValueObjects;
 using MobilePay.TransactionFees.InMemoryStorage;
@@ -17,21 +15,27 @@ namespace MobilePay.TransactionFees.Program
         
         static void Main(string[] args)
         {
-            var merchantRepository = new InMemoryMerchantRepository();
-            merchantRepository.Add(new Merchant(new Name("7-ELEVEN"), new Percentage(0)));
-            merchantRepository.Add(new Merchant(new Name("NETTO"), new Percentage(0)));
-            merchantRepository.Add(new Merchant(new Name("TELIA"), new Percentage(10)));
-            merchantRepository.Add(new Merchant(new Name("CIRCLE_K"), new Percentage(20)));
+            try
+            {
+                var merchantRepository = new InMemoryMerchantRepository();
+                merchantRepository.Add(new Merchant(new Name("7-ELEVEN"), new Percentage(0)));
+                merchantRepository.Add(new Merchant(new Name("NETTO"), new Percentage(0)));
+                merchantRepository.Add(new Merchant(new Name("TELIA"), new Percentage(10)));
+                merchantRepository.Add(new Merchant(new Name("CIRCLE_K"), new Percentage(20)));
             
+                var calculateFeeHandler = new CalculateFeeHandler(new Percentage(TransactionPercentageFee));
+                var calculateFeeWithDiscountHandler = new CalculateFeeWithDiscountHandler(calculateFeeHandler, 
+                    merchantRepository);
+                var calculateWithInvoiceFeeHandler = new CalculateFeeWithInvoiceFeeHandler(calculateFeeWithDiscountHandler, 
+                    new Fee(InvoiceFixedFee));
             
-            var calculateFeeHandler = new CalculateFeeHandler(new Percentage(TransactionPercentageFee));
-            var calculateFeeWithDiscountHandler = new CalculateFeeWithDiscountHandler(calculateFeeHandler, 
-                merchantRepository);
-            var calculateWithInvoiceFeeHandler = new CalculateFeeWithInvoiceFeeHandler(calculateFeeWithDiscountHandler, 
-                new Fee(InvoiceFixedFee));
-            
-            var transactionFeeCalculator = new FeeCalculationApp(calculateWithInvoiceFeeHandler, WriteToConsole);
-            transactionFeeCalculator.CalculateTransactionFees(InputFilePath);
+                var transactionFeeCalculator = new FeeCalculationApp(calculateWithInvoiceFeeHandler, WriteToConsole);
+                transactionFeeCalculator.CalculateTransactionFees(InputFilePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         private static void WriteToConsole(string output)

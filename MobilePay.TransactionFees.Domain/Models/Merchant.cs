@@ -1,4 +1,3 @@
-using System;
 using MobilePay.TransactionFees.Domain.Exceptions;
 using MobilePay.TransactionFees.Domain.ValueObjects;
 
