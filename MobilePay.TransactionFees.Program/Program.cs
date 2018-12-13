@@ -29,9 +29,14 @@ namespace MobilePay.TransactionFees.Program
                 merchantRepository);
             var calculateWithInvoiceFeeHandler = new CalculateFeeWithInvoiceFeeHandler(calculateFeeWithDiscountHandler, 
                 new Fee(InvoiceFixedFee));
-
-            var transactionFeeCalculator = new FeeCalculationApp(calculateWithInvoiceFeeHandler);
+            
+            var transactionFeeCalculator = new FeeCalculationApp(calculateWithInvoiceFeeHandler, WriteToConsole);
             transactionFeeCalculator.CalculateTransactionFees(InputFilePath);
+        }
+
+        private static void WriteToConsole(string output)
+        {
+            Console.WriteLine(output);
         }
     }
 }

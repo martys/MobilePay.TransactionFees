@@ -7,8 +7,8 @@ using Xunit;
 
 namespace MobilePay.TransactionFees.AcceptanceTests
 {
-    // As a MobilePay accountant I want TELIA merchant to get Transaction Fee Percentage Discount (10% discount for 
-    // transaction), so that MobilePay would be more attractive to big merchants  
+    // As a MobilePay accountant I want CIRCLE_K merchant to get Transaction Fee Percentage Discount (20% discount for 
+    // transaction), so that MobilePay would be more attractive to big merchants
     public class MOBILEPAY_3 : TransactionFeeCalculatorAcceptanceTest
     {
         protected override ICommandHandler<CalculateFee, Fee> CommandHandler { get; }

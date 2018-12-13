@@ -10,10 +10,12 @@ namespace MobilePay.TransactionFees.Program
     public class FeeCalculationApp
     {
         private readonly ICommandHandler<CalculateFee, Fee> _calculateFeeHandler;
+        private readonly Action<string> _writeToOutput;
 
-        public FeeCalculationApp(ICommandHandler<CalculateFee, Fee> calculateFeeHandler)
+        public FeeCalculationApp(ICommandHandler<CalculateFee, Fee> calculateFeeHandler, Action<string> writeToOutput)
         {
             _calculateFeeHandler = calculateFeeHandler;
+            _writeToOutput = writeToOutput;
         }
 
         public void CalculateTransactionFees(string sourceFilePath)
@@ -33,16 +35,16 @@ namespace MobilePay.TransactionFees.Program
                                 new Amount(double.Parse(transactionData[2])));
                             var command = new CalculateFee(Guid.NewGuid(), transaction);
                             var transactionFee = _calculateFeeHandler.Handle(command);
-                            Console.WriteLine($"{transaction.Date} {transaction.MerchantName} {transactionFee}");
+                            _writeToOutput($"{transaction.Date} {transaction.MerchantName} {transactionFee}");
                         }
                         else
                         {
-                            Console.WriteLine();
+                            _writeToOutput(Environment.NewLine);
                         }
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        _writeToOutput(e.Message);
                     }
                 }   
             }

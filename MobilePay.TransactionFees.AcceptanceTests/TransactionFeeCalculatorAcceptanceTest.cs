@@ -30,8 +30,6 @@ namespace MobilePay.TransactionFees.AcceptanceTests
             MerchantRepository.Add(new Merchant(new Name("7-ELEVEN"), new Percentage(0)));
             MerchantRepository.Add(new Merchant(new Name("NETTO"), new Percentage(0)));
             Output = new StringBuilder();
-            var writer = new StringWriter(Output);
-            Console.SetOut(writer);
         }
 
         protected void MakeTransaction(double amount, string merchantName, string date)
@@ -46,7 +44,7 @@ namespace MobilePay.TransactionFees.AcceptanceTests
 
         protected void ExecuteFeeCalculationApp()
         {
-            var feeCalculationApp = new FeeCalculationApp(CommandHandler);
+            var feeCalculationApp = new FeeCalculationApp(CommandHandler, WriteToOutput);
             feeCalculationApp.CalculateTransactionFees(SourceFilePath);
         }
 
@@ -54,14 +52,20 @@ namespace MobilePay.TransactionFees.AcceptanceTests
         {
             var actualOutput = Output.ToString().Split(Environment.NewLine).ToList();
             // There will always be an extra new line symbol, and thus an extra empty element. Remove it
-            actualOutput.RemoveAt(actualOutput.Count-1);
-            
+            actualOutput.RemoveAt(actualOutput.Count - 1);
+
             Assert.Equal(expectedOutput.Count(), actualOutput.Count);
 
             for (var i = 0; i < actualOutput.Count; i++)
             {
                 Assert.Equal(expectedOutput.ElementAt(i), actualOutput[i]);
             }
+
+        }
+        
+        protected void WriteToOutput(string outputLine)
+        {
+            Output.AppendLine(outputLine);
         }
 
         // Cleanup the transaction file so we don't leave any trash after the run
