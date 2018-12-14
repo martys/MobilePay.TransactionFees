@@ -54,18 +54,5 @@ namespace MobilePay.TransactionFees.UnitTests.ValueObjects
             //act & assert
             Assert.False(date1.MonthsMatch(date2));
         }
-
-        [Theory]
-        [InlineData("1989/11/26 18:37:58")]
-        [InlineData("11/26/1989")]
-        [InlineData("November 26, 1989")]
-        public void ToString_ReturnsCorrectlyFormattedString(string stringDate)
-        {
-            //arrange
-            var date = new Date(DateTime.Parse(stringDate));
-            
-            //act & assert
-            Assert.Equal("1989-11-26", date.ToString());
-        }
     }
 }

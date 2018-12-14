@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using MobilePay.TransactionFees.Domain.CommandHandlers;
 using MobilePay.TransactionFees.Domain.Commands;
@@ -10,12 +11,12 @@ namespace MobilePay.TransactionFees.Program
     public class FeeCalculationApp
     {
         private readonly ICommandHandler<CalculateFee, Fee> _calculateFeeHandler;
-        private readonly Action<string> _writeToOutput;
+        private readonly IOutputSettings _outputSettings;
 
-        public FeeCalculationApp(ICommandHandler<CalculateFee, Fee> calculateFeeHandler, Action<string> writeToOutput)
+        public FeeCalculationApp(ICommandHandler<CalculateFee, Fee> calculateFeeHandler, IOutputSettings outputSettingss)
         {
             _calculateFeeHandler = calculateFeeHandler;
-            _writeToOutput = writeToOutput;
+            _outputSettings = outputSettingss;
         }
 
         public void CalculateTransactionFees(string sourceFilePath)
@@ -35,16 +36,23 @@ namespace MobilePay.TransactionFees.Program
                                 new Amount(double.Parse(transactionData[2])));
                             var command = new CalculateFee(Guid.NewGuid(), transaction);
                             var transactionFee = _calculateFeeHandler.Handle(command);
-                            _writeToOutput($"{transaction.Date} {transaction.MerchantName} {transactionFee}");
+
+                            var formattedDate = transaction.Date.Value.ToString(_outputSettings.DateFormatting,
+                                CultureInfo.InvariantCulture);
+                            var formattedFee = transactionFee.Value.ToString(_outputSettings.FeeFormatting,
+                                CultureInfo.InvariantCulture);
+                            var formattedMerchantName = transaction.MerchantName.Value;
+                            _outputSettings.WriteToOutput(
+                                $"{formattedDate} {formattedMerchantName} {formattedFee}");
                         }
                         else
                         {
-                            _writeToOutput(Environment.NewLine);
+                            _outputSettings.WriteToOutput(Environment.NewLine);
                         }
                     }
                     catch (Exception e)
                     {
-                        _writeToOutput(e.Message);
+                        _outputSettings.WriteToOutput(e.Message);
                     }
                 }   
             }

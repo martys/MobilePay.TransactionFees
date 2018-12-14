@@ -26,18 +26,5 @@ namespace MobilePay.TransactionFees.UnitTests.ValueObjects
             //act & assert
             Assert.Throws<DomainException>(() => new Fee(input));
         }
-
-        [Theory]
-        [InlineData(2.00000)]
-        [InlineData(2.00321)]
-        [InlineData(2)]
-        public void ToString_ShouldFormatNumbersCorrectly(double input)
-        {
-            //act
-            var fee = new Fee(input);
-            
-            //assert
-            Assert.Equal("2.00", fee.ToString());
-        }
     }
 }

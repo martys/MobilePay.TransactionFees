@@ -12,6 +12,7 @@ namespace MobilePay.TransactionFees.Program
         public const double TransactionPercentageFee = 1;
         public const double InvoiceFixedFee = 29;
         public const string InputFilePath = "transactions.txt";
+        public static readonly IOutputSettings OutputSettings = new OutputSettings();
         
         static void Main(string[] args)
         {
@@ -29,7 +30,10 @@ namespace MobilePay.TransactionFees.Program
                 var calculateWithInvoiceFeeHandler = new CalculateFeeWithInvoiceFeeHandler(calculateFeeWithDiscountHandler, 
                     new Fee(InvoiceFixedFee));
             
-                var transactionFeeCalculator = new FeeCalculationApp(calculateWithInvoiceFeeHandler, WriteToConsole);
+                var outputSettings = new OutputSettings();
+                
+                
+                var transactionFeeCalculator = new FeeCalculationApp(calculateWithInvoiceFeeHandler, OutputSettings);
                 transactionFeeCalculator.CalculateTransactionFees(InputFilePath);
             }
             catch (Exception e)

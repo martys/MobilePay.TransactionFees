@@ -20,6 +20,7 @@ namespace MobilePay.TransactionFees.AcceptanceTests
         protected abstract ICommandHandler<CalculateFee, Fee> CommandHandler { get; }
         protected abstract string SourceFilePath { get; }
         protected IMerchantRepository MerchantRepository { get; }
+        protected IOutputSettings OutputSettings { get; }
         protected StringBuilder Output { get; }
 
         protected TransactionFeeCalculatorAcceptanceTest()
@@ -30,6 +31,7 @@ namespace MobilePay.TransactionFees.AcceptanceTests
             MerchantRepository.Add(new Merchant(new Name("7-ELEVEN"), new Percentage(0)));
             MerchantRepository.Add(new Merchant(new Name("NETTO"), new Percentage(0)));
             Output = new StringBuilder();
+            OutputSettings = new AcceptanceTestOutputSettings(WriteToStringBuilder);
         }
 
         protected void MakeTransaction(double amount, string merchantName, string date)
@@ -44,7 +46,7 @@ namespace MobilePay.TransactionFees.AcceptanceTests
 
         protected void ExecuteFeeCalculationApp()
         {
-            var feeCalculationApp = new FeeCalculationApp(CommandHandler, WriteToOutput);
+            var feeCalculationApp = new FeeCalculationApp(CommandHandler, OutputSettings);
             feeCalculationApp.CalculateTransactionFees(SourceFilePath);
         }
 
@@ -63,7 +65,7 @@ namespace MobilePay.TransactionFees.AcceptanceTests
 
         }
         
-        protected void WriteToOutput(string outputLine)
+        protected void WriteToStringBuilder(string outputLine)
         {
             Output.AppendLine(outputLine);
         }
@@ -72,6 +74,18 @@ namespace MobilePay.TransactionFees.AcceptanceTests
         public void Dispose()
         {
             File.Delete(SourceFilePath);
+        }
+
+        protected class AcceptanceTestOutputSettings : IOutputSettings
+        {
+            public AcceptanceTestOutputSettings(Action<string> test)
+            {
+                WriteToOutput = test;
+            }
+            
+            public Action<string> WriteToOutput { get; private set; }
+            public string DateFormatting => "yyyy-MM-dd";
+            public string FeeFormatting => "F";
         }
     }
 }

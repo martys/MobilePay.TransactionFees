@@ -15,11 +15,5 @@ namespace MobilePay.TransactionFees.Domain.ValueObjects
             }
             Value = value;
         }
-        
-        //TODO - do we need to always take floor instead of rounding, so we don't 'overcharge' the client?
-        public override string ToString()
-        {
-            return Value.ToString("F", CultureInfo.InvariantCulture);
-        }
     }
 }

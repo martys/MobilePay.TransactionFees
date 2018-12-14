@@ -15,10 +15,5 @@ namespace MobilePay.TransactionFees.Domain.ValueObjects
 
             Value = value;
         }
-
-        public override string ToString()
-        {
-            return Value;
-        }
     }
 }
