@@ -17,6 +17,18 @@ namespace MobilePay.TransactionFees.AcceptanceTests
     // We implement IDisposable to workaround xUnit not having TearDown mechanism
     public abstract class TransactionFeeCalculatorAcceptanceTest : IDisposable
     {
+        protected class AcceptanceTestOutputSettings : IOutputSettings
+        {
+            public AcceptanceTestOutputSettings(Action<string> test)
+            {
+                WriteToOutput = test;
+            }
+            
+            public Action<string> WriteToOutput { get; }
+            public string DateFormatting => "yyyy-MM-dd";
+            public string FeeFormatting => "F";
+        }
+        
         protected abstract ICommandHandler<CalculateFee, Fee> CommandHandler { get; }
         protected abstract string SourceFilePath { get; }
         protected IMerchantRepository MerchantRepository { get; }
@@ -74,18 +86,6 @@ namespace MobilePay.TransactionFees.AcceptanceTests
         public void Dispose()
         {
             File.Delete(SourceFilePath);
-        }
-
-        protected class AcceptanceTestOutputSettings : IOutputSettings
-        {
-            public AcceptanceTestOutputSettings(Action<string> test)
-            {
-                WriteToOutput = test;
-            }
-            
-            public Action<string> WriteToOutput { get; private set; }
-            public string DateFormatting => "yyyy-MM-dd";
-            public string FeeFormatting => "F";
         }
     }
 }
